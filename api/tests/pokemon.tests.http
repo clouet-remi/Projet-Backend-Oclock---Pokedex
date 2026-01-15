@@ -1,0 +1,39 @@
+@baseUrl = http://localhost:3000
+@token = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoyLCJpYXQiOjE3Njg0ODMxNzAsImV4cCI6MTc2ODQ4Njc3MH0.YKkmwSo7Uu8HQKiLRajP_JmkQsO6RQHH8rY3NLI06fg
+
+### Test 1 : Get sur la route de pokemon getAll pour tout récupérer
+GET {{baseUrl}}/pokemons/getAll
+Content-Type: application/json
+Authorization: Bearer {{ token }}
+
+
+### Test 2 : Get sur la route de pokemon pour récupérer celui avec l'id 1
+GET {{baseUrl}}/pokemons/1
+Content-Type: application/json
+Authorization: Bearer {{ token }}
+
+### Test 3 : Post sur la route de pokemon pour donner un vote à Mewto (id: 150)
+POST {{baseUrl}}/pokemons/addVote/150
+Content-Type: application/json
+Authorization: Bearer {{ token }}
+
+### Test 4 : Delete pour supprimer un vote associé à un pokemon
+DELETE {{baseUrl}}/pokemons/deleteVote/150
+Authorization: Bearer {{ token }}
+
+### Test 4 : Post pour récupérer un pokemon avec son nom
+POST {{baseUrl}}/pokemons/getByName?pokemonName=mewtwo
+Authorization: Bearer {{ token }}
+
+### Test 5 : Post pour comparer deux pokemon avec leur nom
+POST {{baseUrl}}/pokemons/compare
+Authorization: Bearer {{ token }}
+Content-Type: application/json
+
+{
+    "pokemonOne": "Sulfura", 
+    "pokemonTwo": "Mew"
+}
+
+
+

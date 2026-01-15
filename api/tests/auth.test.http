@@ -1,0 +1,31 @@
+@baseUrl = http://localhost:3000
+
+### Test 1 : Post sur la route de auth pour créer un compte
+POST {{baseUrl}}/auth/register
+Content-Type: application/json
+
+{
+    "username": "clouet_remi",
+    "password": "Adminpassword1"
+}
+
+### Test 2 : Post sur la route de auth pour créer un compte avec valeurs erronées
+POST {{baseUrl}}/auth/register
+Content-Type: application/json
+
+{
+    "username": 1,
+    "password": 2
+}
+
+### Test 3 : Post sur la route de auth pour se connecter
+POST {{baseUrl}}/auth/login
+Content-Type: application/json
+
+{
+    "username": "adminuser",
+    "password": "Adminpassword1"
+}
+
+### Test 4 : Get sur la route de auth/my-teams pour récupérer ses équipes
+GET {{baseUrl}}/auth/1/myTeams

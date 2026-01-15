@@ -1,0 +1,10 @@
+@baseUrl = http://localhost:3000
+@token = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoyLCJpYXQiOjE3NjgzOTIxMjksImV4cCI6MTc2ODM5NTcyOX0.iA0yg6aMYmVCzWRBvKmMmP-DQPHuX7lDCd4LitMVxFk
+
+### Test 1 : Get sur la route de type getAll pour tout récupérer
+GET {{baseUrl}}/types/getAll
+Authorization: Bearer {{ token }}
+
+### Test 2 : Get sur la route de type pour récupérer celui avec l'id 1
+GET {{baseUrl}}/types/1
+Authorization: Bearer {{ token }}

@@ -1,0 +1,82 @@
+@baseUrl = http://localhost:3000
+# @accessToken=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoyLCJpYXQiOjE3NjgzNjEzOTQsImV4cCI6MTc2ODM2NDk5NH0.QNPWyiY9wOJ952qDygdaDf25L1Gek1NySAAExs0vh2g
+@token = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoyLCJpYXQiOjE3Njg0NjUzNzIsImV4cCI6MTc2ODQ2ODk3Mn0.gckKRPlTKOersR2GvMzrXAxQErCa1Vq6gAphtS14H28
+
+
+### BONUS - Test 1 : Get sur la route de team getOwnTeams pour récupérer toutes les équipes de l'utilateur connecté
+GET {{baseUrl}}/teamsv2/me
+Authorization: Bearer {{ token }}
+
+
+### BONUS - Test 2  : Get sur la route de team pour récupérer celle avec l'id 1
+GET {{baseUrl}}/teamsv2/get/2
+Authorization: Bearer {{ token }}
+
+### BONUS - Test 3  : Get sur la route de team pour récupérer la team d'un autre utilisateur
+GET {{baseUrl}}/teamsv2/get/1
+Authorization: Bearer {{ token }}
+
+
+### BONUS - Test 4 : Post sur la route de team pour créer une équipe associé à l'user avec l'id 1
+POST {{baseUrl}}/teamsv2/new
+Content-Type: application/json
+Authorization: Bearer {{ token }}
+
+{
+    "name": "Nouvelle team associée à mon User connecté",
+    "description": "Ma nouvelle team associée à mon user connecté"
+}
+
+### BONUS - Test5 : Patch pour modifier le nom d'une de ses équipes 
+PATCH {{baseUrl}}/teamsv2/update/2
+Content-Type: application/json
+Authorization: Bearer {{ token }}
+
+{
+    "name": "Nouveau nom de mon équipe après vérification de user_id"
+}
+
+### BONUS - Test 6 : Patch pour modifier le nom d'une équipe n'appartenant pas à l'utilisateur connecté (adminuser)
+PATCH {{baseUrl}}/teamsv2/update/1
+Content-Type: application/json
+Authorization: Bearer {{ token }}
+
+{
+    "name": "Nouveau nom de mon équipe après vérification de user_id"
+}
+
+### BONUS - Test 7 : Patch pour ajouter un pokemon dans une de ses équipes 
+PATCH {{baseUrl}}/teamsv2/2/newPokemon?pokemonId=146
+Content-Type: application/json
+Authorization: Bearer {{ token }}
+
+{
+    "name": "Ma team avec Sulfura d'ajouté",
+    "description": "la team avec un Sulfura ajouté"
+}
+
+### BONUS - Test 8 : Patch pour ajouter un pokemon dans une équipe qui n'est pas la sienne 
+PATCH {{baseUrl}}/teamsv2/1/newPokemon?pokemonId=146
+Content-Type: application/json
+Authorization: Bearer {{ token }}
+
+{
+    "name": "Ma team avec Sulfura d'ajouté",
+    "description": "la team avec un Sulfura ajouté"
+}
+
+### BONUS - Test 9 : Delete pour supprimer un pokemon de son équipe
+DELETE {{baseUrl}}/teamsv2/2/removePokemon?pokemonId=146
+Authorization: Bearer {{ token }}
+
+### BONUS - Test 10 : Delete pour supprimer un pokemon d'une autre équipe
+DELETE {{baseUrl}}/teamsv2/1/removePokemon?pokemonId=146
+Authorization: Bearer {{ token }}
+
+### Test 11 : Delete pour supprimer son équipe numéro 2 
+DELETE {{baseUrl}}/teamsv2/remove/2
+Authorization: Bearer {{ token }}
+
+### Test 12 : Delete pour supprimer l'équipe numéro 1 qui n'est pas la nôtre
+DELETE {{baseUrl}}/teamsv2/remove/1
+Authorization: Bearer {{ token }}

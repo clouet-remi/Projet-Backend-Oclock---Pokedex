@@ -1,0 +1,77 @@
+@baseUrl = http://localhost:3000
+# @accessToken=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoyLCJpYXQiOjE3NjgzNjEzOTQsImV4cCI6MTc2ODM2NDk5NH0.QNPWyiY9wOJ952qDygdaDf25L1Gek1NySAAExs0vh2g
+@token = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoyLCJpYXQiOjE3Njg0NjUzNzIsImV4cCI6MTc2ODQ2ODk3Mn0.gckKRPlTKOersR2GvMzrXAxQErCa1Vq6gAphtS14H28
+
+### Test 1 : Get sur la route de team getAll pour tout récupérer
+GET {{baseUrl}}/teams/getAll
+Authorization: Bearer {{ token }}
+
+### Test 2 : Get sur la route de team pour récupérer celle avec l'id 1
+GET {{baseUrl}}/teams/search/1
+Authorization: Bearer {{ token }}
+
+### Test 3 : Post sur la route de team pour créer une équipe
+POST {{baseUrl}}/teams/
+Content-Type: application/json
+Authorization: Bearer {{ token }}
+
+{
+    "name": "Nouvelle team",
+    "description": "Ma nouvelle team trop cool"
+}
+
+### Test 4 : Post sur la route de team avec un contenu erroné 
+POST {{baseUrl}}/teams/
+Content-Type: application/json
+Authorization: Bearer {{ token }}
+
+{
+    "name": 122,
+    "description": 999999
+}
+
+### Test 5 : Patch sur la route de team pour modifier le nom d'une équipe avec un id valide
+PATCH {{baseUrl}}/teams/1
+Content-Type: application/json
+Authorization: Bearer {{ token }}
+
+{
+    "name": "Ma team modifié après update"
+}
+
+### Test 6 : Patch sur la route de team pour modifier le nom d'une équipe avec une valeur autre qu'une chaîne de caractères
+PATCH {{baseUrl}}/teams/1
+Content-Type: application/json
+Authorization: Bearer {{ token }}
+
+{
+    "name": 10000
+}
+
+### Test 7 : Patch sur la route de team pour ajouter un pokemon 
+PATCH {{baseUrl}}/teams/1/addPokemon?pokemonId=150
+Content-Type: application/json
+Authorization: Bearer {{ token }}
+
+{
+    "name": "Ma team avec Mewto ajouté",
+    "description": "la team avec un pokemon ajouté"
+}
+
+### Test 8 : Patch sur la route de team pour ajouter un pokemon avec un ID inexitant
+PATCH {{baseUrl}}/teams/1/addPokemon?pokemonId=15000
+Content-Type: application/json
+Authorization: Bearer {{ token }}
+
+{
+    "name": "Ma team avec Mewto ajouté",
+    "description": "la team avec un pokemon ajouté"
+}
+
+### Test 9 : Delete sur la route de team pour supprimer un pokemon 
+DELETE {{baseUrl}}/teams/1/deletePokemon?pokemonId=150
+Authorization: Bearer {{ token }}
+
+### Test 10 : Delete sur la route de team pour supprimer l'équipe numéro 1
+DELETE {{baseUrl}}/teams/1/
+Authorization: Bearer {{ token }}
